@@ -2,18 +2,21 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-import React from "react"
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false) // State for login status
   const router = useRouter()
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn")
-    if (isLoggedIn === "true") {
-      router.push("/admin/dashboard")
+    if (typeof window !== "undefined") {
+      const loggedIn = localStorage.getItem("isLoggedIn") === "true"
+      setIsLoggedIn(loggedIn)
+      if (loggedIn) {
+        router.push("/admin/dashboard")
+      }
     }
   }, [router])
 
