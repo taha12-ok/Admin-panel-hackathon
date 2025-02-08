@@ -7,13 +7,11 @@ export default function AdminLogin() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
-  const [isLoggedIn, setIsLoggedIn] = useState(false) // State for login status
   const router = useRouter()
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const loggedIn = localStorage.getItem("isLoggedIn") === "true"
-      setIsLoggedIn(loggedIn)
       if (loggedIn) {
         router.push("/admin/dashboard")
       }
